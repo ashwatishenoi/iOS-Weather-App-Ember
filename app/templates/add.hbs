@@ -1,0 +1,12 @@
+<p id="addcity">Enter city,zipcode or airport location </p>
+{{input type="text"  value=newcity class="newcity" placeholder=""}}
+{{#link-to 'index'}}{{input type="submit" class="cancel" value="Cancel" }}{{/link-to}}<br/>
+
+<ul id="myid">
+{{#each city in controller}}
+<li class="cityapi" {{action 'addCity' city  target='controller'}}>
+	{{city.formatted_address}}
+</li>
+
+{{/each}}
+</ul>

@@ -1,0 +1,71 @@
+<div id="cities-list">
+	<ul>
+		{{#unless isCurlocDenied}}
+		<li {{bind-attr class='isClass'}}>
+		{{#link-to 'city' 0}}
+		<ul>
+		<li class="city-info">
+		<div class="time">
+	    {{currTime}}
+		</div>
+
+		<div class="city-name">
+		Current Location
+		</div>
+		</li>
+		<li class="temperature">
+		{{currTemperature}}
+		</li>
+		</ul>
+		{{/link-to}}
+		</li>
+		{{/unless}}
+		{{#each city in controller}}
+			<li {{bind-attr class='city.backgrnd'}}>
+				{{#link-to 'city' city.id}}
+				<ul>
+					{{#if isEditing}}
+					
+					<div {{action 'deleteCity' city target='controller'}}>
+						<p id='delbtn'>−</p>
+					</div>
+					
+					{{/if}}
+					<li class="city-info">
+						<div {{bind-attr class=":time isEditing"}}>
+							{{city.time}}
+						</div>						
+						<div {{bind-attr class=":city-name isEditing"}}>
+							{{city.displayName}}
+						</div>
+					</li>
+					<li class="temperature">
+						{{city.temperature}}
+					</li>
+				</ul>
+				{{/link-to}}
+			</li>
+		{{/each}}
+	</ul>
+</div>
+
+
+<nav id="citylist">
+  <ul>
+    <div {{bind-attr class=":celsius-or-fahrenheit useUSUnits:use-fahrenheit:use-celsius"}}> 
+     
+        <span class="celsius" {{action 'useCelsius'}}>˚C</span>
+         ⁄
+        <span class="fahrenheit" {{action 'useFaren'}}>˚F</span>
+ 
+    </div>
+
+	{{#if isEditing}}
+	<div class='edit-button' {{action 'done'}}>Done</div>
+	{{else}}
+	<div class='edit-button' {{action 'edit'}}>Edit</div>
+	{{/if}}
+	<div class='add-button' >{{#link-to 'add'}}+{{/link-to}}
+	</div>
+  </ul>
+</nav>

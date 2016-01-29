@@ -1,0 +1,240 @@
+<div id="selected-city" {{bind-attr class='isClass'}}>
+  <section id="city-header">
+      <h2> 
+         {{cityName}}
+      </h2>
+      <h4> 
+        {{summary}}
+      </h4>
+      <h1>
+		  {{temperature}}
+      </h1>
+  </section>
+  <section id="today">
+    <ul class="today-overview">
+        <li> 
+          {{day}}
+        </li>
+        <li>
+          {{relativeDay}}
+        </li>
+        <li>
+          {{temperatureMax}}
+        </li>
+        <li>
+          {{temperatureMin}}
+        </li>
+    </ul>
+    <div class="today-hourly-list-container">
+      <ul class="today-hourly-list">
+		{{#each detail in hourlyData}}
+        <li>
+          <ul>
+            <li>{{detail.hour}}</li>
+           <li>
+			  <img {{bind-attr src='detail.hrIcon'}}>
+		   </li>
+            <li>{{detail.hrTemp}}</li>
+          </ul>
+        </li>
+		{{/each}}
+      </ul>
+    </div>
+  </section>
+  <section id="forecast">
+    <ul class="forecast-list">
+		{{#each detail in dailyData}}
+        <li>
+          <ul>
+            <li> 
+              {{detail.day}}
+            </li>
+            <li> 
+              <img {{bind-attr src='detail.dailyIcon'}}>
+            </li>
+            <li>
+              {{detail.tempMax}}
+            </li>
+            <li> 
+              {{detail.tempMin}}
+              </li>
+			  
+          </ul>
+        </li>
+	 {{/each}}
+    </ul>
+  </section>
+  <section id="today-details">
+    <p class="today-summary">Today: {{todaySummary}}</p>
+    <ul class="today-details-list">
+        <li>
+          <ul>
+            <li> 
+               Sunrise:
+            </li>
+            <li> 
+              {{sunrise}}
+            </li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li> 
+               Sunset:
+            </li>
+            <li> 
+              {{sunset}}
+            </li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li> 
+               
+            </li>
+            <li> 
+              
+            </li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li> 
+               Chance of Rain: 
+            </li>
+            <li> 
+              {{rain}}
+            </li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li> 
+               Humidity:
+            </li>
+            <li> 
+              {{humidity}}
+            </li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li> 
+              
+            </li>
+            <li> 
+              
+            </li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li> 
+               Wind:
+            </li>
+            <li> 
+              {{wind}}
+            </li>
+          </ul>
+        </li>
+       <li>
+         <ul>
+           <li> 
+              Feels like:
+           </li>
+           <li> 
+             {{apparentTemp}}
+           </li>
+         </ul>
+       </li>
+       <li>
+         <ul>
+           <li>         
+           </li>
+           <li> 
+           </li>
+         </ul>
+       </li>
+       <li>
+         <ul>
+           <li> 
+              Precipitation:
+           </li>
+           <li> 
+             {{precipitation}}
+           </li>
+         </ul>
+       </li>
+       <li>
+         <ul>
+           <li> 
+              Pressure:
+           </li>
+           <li> 
+             {{pressure}}
+           </li>
+          </ul>
+       </li>
+       <li>
+         <ul>
+           <li> 
+              
+           </li>
+           <li> 
+  
+           </li>
+         </ul>
+       </li>
+       <li>
+         <ul>
+           <li> 
+              Visibility:
+           </li>
+           <li> 
+             {{visibility}}
+           </li>
+         </ul>
+       </li>
+    </ul>
+  </section>
+</div>
+<nav {{bind-attr class='isClass'}}>
+  <ul>
+      <div {{bind-attr class=":celsius-or-fahrenheit useUSUnits:use-fahrenheit:use-celsius"}}> 
+     
+          <span class="celsius" {{action 'useCelsius'}}>˚C</span>
+           ⁄
+          <span class="fahrenheit" {{action 'useFaren'}}>˚F</span>
+ 
+      </div>
+	
+	<div class="next-prev-nav">
+	        <div {{bind-attr class=":prev-button isFirstCity:disabled"}} >
+	         <a {{action 'navToPrevCity'}}> ◀</a>
+	        </div>
+
+    
+	        <div class="indicator-dots">
+				{{#unless isCurlocDenied}}
+	            <span {{bind-attr class=":dot isCurrent:current"}}>
+	              •
+	            </span>
+				{{/unless}}
+				{{#each city in controller}}
+	            <span {{bind-attr class=":dot city.isCurrent:current"}}>
+	              •
+	            </span>
+				{{/each}}
+			</div>
+			
+	        <div {{bind-attr class=":next-button isLastCity:disabled"}}>
+	          <a {{action 'navToNextCity'}}>▶</a>
+	        </div>
+	</div>
+	
+    <div class="list-button">
+     {{#link-to '/'}}☰{{/link-to}}
+    </div>		
+			
+  </ul>
+</nav>
